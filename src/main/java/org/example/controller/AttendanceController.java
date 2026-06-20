@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.dto.AttendanceResponse;
 import org.example.entity.Attendance;
 import org.example.service.AttendanceService;
 import org.springframework.stereotype.Controller;
@@ -25,4 +26,21 @@ public class AttendanceController {
     public Attendance saveAttendance(@RequestBody Attendance attendance){
         return attendanceService.saveAttendance(attendance);
     }
+    @GetMapping("/student/{studentId}")
+    public List<Attendance> getAttendanceByStudentId(@PathVariable Long studentId){
+        return attendanceService.getAttendanceByStudentId(studentId);
+    }
+    @GetMapping("/student/{studentId}/overall")
+    public double getOverallAttendance(@PathVariable Long studentId){
+        return attendanceService.getOverallAttendance(studentId);
+    }
+    @GetMapping("/{attendanceId}/response")
+        public AttendanceResponse getResponse(@PathVariable Long attendanceId){
+            return attendanceService.getResponse(attendanceId);
+        }
+    @GetMapping("/student/{studentId}/response")
+    public List<AttendanceResponse> getSubjectWiseResponse(@PathVariable Long studentId){
+        return attendanceService.getSubjectWiseResponse(studentId);
+    }
+
 }
