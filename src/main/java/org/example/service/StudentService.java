@@ -1,5 +1,7 @@
 package org.example.service;
 
+import org.example.Exceptions.InvalidCredentialsException;
+import org.example.Exceptions.StudentNotFoundException;
 import org.example.dto.DashboardResponse;
 import org.example.dto.LoginRequest;
 import org.example.entity.Student;
@@ -28,10 +30,10 @@ public class StudentService {
     public Student createStudents(Student student){
         return studentRepository.save(student);
     }
-    public DashboardResponse login(LoginRequest loginRequest){
-        Student student = studentRepository.findById(loginRequest.getStudentId()).orElseThrow(()->new RuntimeException("Student not found"));
+    public DashboardResponse login(LoginRequest loginRequest) throws StudentNotFoundException {
+        Student student = studentRepository.findById(loginRequest.getStudentId()).orElseThrow(()->new StudentNotFoundException("Student not found"));
         if(!student.getPassword().equals(loginRequest.getPassword())){
-            throw new RuntimeException("Invalid Password");
+            throw new InvalidCredentialsException("Invalid Password");
         }
 
         return new DashboardResponse(
