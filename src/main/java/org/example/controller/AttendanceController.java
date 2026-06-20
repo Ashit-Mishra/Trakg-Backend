@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import jakarta.validation.Valid;
 import org.example.dto.AttendanceResponse;
 import org.example.entity.Attendance;
 import org.example.service.AttendanceService;
@@ -23,7 +24,7 @@ public class AttendanceController {
         return attendanceService.getAllAttendance();
     }
     @PostMapping
-    public Attendance saveAttendance(@RequestBody Attendance attendance){
+    public Attendance saveAttendance(@RequestBody @Valid Attendance attendance){
         return attendanceService.saveAttendance(attendance);
     }
     @GetMapping("/student/{studentId}")

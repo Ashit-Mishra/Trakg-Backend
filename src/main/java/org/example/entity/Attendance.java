@@ -1,6 +1,8 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Attendance {
@@ -12,8 +14,9 @@ public class Attendance {
     private Student student;
     @ManyToOne
     private Subject subject;
-
+    @Min(0)
     private Integer classAttended;
+    @Min(0)
     private Integer totalClasses;
 
     public Attendance(Long id, Student student, Subject subject, Integer classAttended, Integer totalClasses) {

@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import jakarta.validation.Valid;
 import org.example.entity.Subject;
 import org.example.service.SubjectService;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,8 @@ public class SubjectController {
         return subjectService.getAllSubjects();
     }
     @PostMapping
-    public Subject saveSubjects(@RequestBody Subject subject){
+    public Subject saveSubjects(@RequestBody @Valid Subject subject){
+
         return subjectService.saveSubjects(subject);
     }
 }

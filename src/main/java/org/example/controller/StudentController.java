@@ -1,5 +1,8 @@
 package org.example.controller;
 
+import jakarta.validation.Valid;
+import org.example.dto.DashboardResponse;
+import org.example.dto.LoginRequest;
 import org.example.entity.Student;
 import org.example.service.StudentService;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +24,11 @@ public class StudentController {
         return studentService.getAllStudents();
     }
     @PostMapping
-    public Student createStudents(@RequestBody Student student){
+    public Student createStudents(@RequestBody @Valid Student student){
         return studentService.createStudents(student);
+    }
+    @PostMapping("/login")
+    public DashboardResponse login(@RequestBody LoginRequest loginRequest){
+        return studentService.login(loginRequest);
     }
 }
